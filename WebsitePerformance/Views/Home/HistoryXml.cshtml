@@ -1,0 +1,36 @@
+﻿@using WebsitePerformance.Models
+@model IEnumerable<FoundSiteMape>
+
+@{
+    ViewBag.Title = "HistoryXml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>History Xml</h2>
+@{int count = 0;}
+<h3>In history @Model.Count() xml files </h3>
+
+<table>
+    <tr class="header">
+        <td><p>@Html.Label("№")</p></td>
+        <td><p>@Html.Label("Min time")</p></td>
+        <td><p>@Html.Label("Max time")</p></td>
+        <td><p>@Html.Label("Average time")</p></td>
+        <td><p>@Html.Label("URL")</p></td>
+    </tr>
+    @foreach (FoundSiteMape b in Model)
+    {
+
+        count++;
+
+        <tr>
+            <td>@count</td>
+            <td>@b.TimeMin</td>
+            <td>@b.TimeMax</td>
+            <td>@b.TimeAverage</td>
+            <td>@Html.ActionLink(@b.NameSateMape, "SpecificPartPages", "Home", new { id = @b.Id }, null)</td>
+        </tr>
+    }
+</table>
+
+

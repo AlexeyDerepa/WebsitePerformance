@@ -1,0 +1,60 @@
+﻿@model WebsitePerformance.Models.FoundWebSiteAddress
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm("SearchSiteMape", "Home", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>determine the performance of the site only by xml</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.UrlAddress)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.UrlAddress)
+            @Html.ValidationMessageFor(model => model.UrlAddress)
+        </div>
+
+        <p>
+            <input type="submit" value="Only XML" />
+        </p>
+    </fieldset>
+}
+@using (Html.BeginForm("SearchDeepSiteMape", "Home", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>a complete study of the performance of the site page by page</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.UrlAddress)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.UrlAddress)
+            @Html.ValidationMessageFor(model => model.UrlAddress)
+        </div>
+
+        <p>
+            <input type="submit" value="Deep researc" />
+        </p>
+    </fieldset>
+}
+
+@if (@TempData["Message"] != null)
+{
+    <strong>@TempData["Message"]</strong>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

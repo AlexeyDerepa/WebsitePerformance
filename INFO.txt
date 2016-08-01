@@ -1,0 +1,51 @@
+how to get sitemap of any website with C#
+
+
+web crawler - How to find sitemap.xml path on websites?
+http://stackoverflow.com/questions/10232774/how-to-find-sitemap-xml-path-on-websites
+
+
+
+http://www.cyberforum.ru/csharp-beginners/thread792123.html
+============================================================================================================
+USE WebSite
+go
+
+SELECT fwsa.id,fwsa.UrlAddress, fsm.NameSateMape
+FROM [dbo].[FoundSiteMapes] AS fsm, [dbo].[FoundWebSiteAddresses] as fwsa
+WHERE fsm.FoundWebSiteAddressId = fwsa.Id
+============================================================================================================
+use WebSite
+go
+
+SELECT FWSA.Id,FWSA.UrlAddress, FSM.NameSateMape, FSM.Id, FSP.FoundSiteMapeId, FSP.NameSitePage
+FROM  [dbo].[FoundSitePages] FSP LEFT OUTER JOIN  [dbo].[FoundSiteMapes] FSM ON FSP.FoundSiteMapeId=FSM.Id
+     INNER JOIN [dbo].[FoundWebSiteAddresses]  FWSA ON FSM.FoundWebSiteAddressId=FWSA.ID
+GO
+
+============================================================================================================
+/****** Script for SelectTopNRows command from SSMS  ******/
+SELECT fsp.[Id]
+      ,[NameSitePage]
+      ,[TimeMin]
+      ,[TimeMax]
+      ,[TimeAverage]
+      ,[FoundSiteMapeId]
+  FROM [WebSite].[dbo].[FoundSitePages] as fsp left outer join [WebSite].[dbo].[FoundSiteMapes] as fsm on fsp.FoundSiteMapeId = fsm.Id
+  where fsp.FoundSiteMapeId = 79
+============================================================================================================
+            var allInfo = (from page in db.FoundSitePages
+                    join xml in db.FoundSiteMapes on page.FoundSiteMapeId equals xml.Id
+                    join addr in db.Addresses on xml.FoundWebSiteAddressId equals addr.Id
+                    where addr.Id == 5
+                    //orderby page.TimeMin 
+                    select new AllModels { URL = addr, XML = xml, PAGE = page }).OrderByDescending(x =>x.PAGE.TimeMin);
+============================================================================================================
+
+
+
+
+
+
+
+

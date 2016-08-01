@@ -1,0 +1,12 @@
+﻿@model List<string>
+
+@{
+    ViewBag.Title = "SearchHost";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<ul>
+    @foreach (string item in Model)
+    {
+        <li>@item</li>
+    }
+</ul>

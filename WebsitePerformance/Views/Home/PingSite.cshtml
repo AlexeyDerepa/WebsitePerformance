@@ -1,0 +1,47 @@
+﻿@*@model List<string>*@
+@model WebsitePerformance.Models.FoundWebSiteAddress
+
+@{
+    ViewBag.Title = "PingSite";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Ping Site</h2>
+
+
+@using (Html.BeginForm("PingSite", "Home", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Ping site by URL address</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.UrlAddress)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.UrlAddress)
+            @Html.ValidationMessageFor(model => model.UrlAddress)
+        </div>
+
+        <p>
+            <input type="submit" value="Go" />
+        </p>
+    </fieldset>
+}
+
+
+@if (ViewBag.List != null)
+{
+    foreach (string item in ViewBag.List)
+    {
+        @item<br/>
+    }
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

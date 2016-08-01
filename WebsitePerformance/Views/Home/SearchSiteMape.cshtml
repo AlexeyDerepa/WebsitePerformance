@@ -1,0 +1,13 @@
+﻿@using WebsitePerformance.Models
+@model IEnumerable<FoundSitePage>
+
+@{
+    ViewBag.Title = "SearchSiteMape";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>SearchSiteMape</h2>
+@foreach (FoundSitePage item in @Model)
+{
+    @item<br/>
+}

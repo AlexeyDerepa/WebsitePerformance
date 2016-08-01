@@ -1,0 +1,34 @@
+﻿@using WebsitePerformance.Models
+@model IEnumerable<FoundSitePage>
+
+@{
+    ViewBag.Title = "SearchSitePage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{int count = 0;}
+<h3>In history @Model.Count() pages</h3>
+
+<table>
+    <tr class="header">
+        <td><p>@Html.Label("№")</p></td>
+        <td><p>@Html.Label("Min time")</p></td>
+        <td><p>@Html.Label("Max time")</p></td>
+        <td><p>@Html.Label("Average time")</p></td>
+        <td><p>@Html.Label("URL")</p></td>
+    </tr>
+    @foreach (FoundSitePage b in Model)
+    {
+       
+        count++;
+        
+        <tr>
+            <td>@count</td>
+            <td>@b.TimeMin</td>
+            <td>@b.TimeMax</td>
+            <td>@b.TimeAverage</td>
+            <td><a href="@b.NameSitePage">@b.NameSitePage</a></td>
+        </tr>
+    }
+</table>
+
